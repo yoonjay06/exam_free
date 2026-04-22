@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ICT와 소프트웨어 — 고난도 예상문제 100제</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:rgba(0,0,0,0)}
+html,body{margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  background:#f5f5f0;color:#1a1a18;min-height:100vh;padding:12px;
+  -webkit-text-size-adjust:100%;
+}
+.container{max-width:920px;margin:0 auto}
+h1{font-size:21px;font-weight:700;margin:0 0 6px}
+.subtitle{font-size:13px;color:#777;line-height:1.6;margin:0 0 12px}
+.notice{
+  background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8;
+  border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:13px;line-height:1.6
+}
+.set-bar,.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.set-btn,.tool-btn,.next-btn,.retry-btn,.opt{
+  -webkit-appearance:none;appearance:none;border-radius:10px;font-family:inherit
+}
+.set-btn{
+  padding:10px 12px;border:1px solid #ddd;background:#fff;color:#555;font-size:13px;font-weight:700
+}
+.set-btn.active{background:#1a1a18;color:#fff;border-color:#1a1a18}
+.tool-btn{
+  padding:10px 12px;border:1px solid #1a1a18;background:#fff;color:#1a1a18;font-size:13px;font-weight:700
+}
+.card{
+  background:#fff;border-radius:14px;border:1px solid #e8e8e4;padding:16px;
+  margin-bottom:12px;box-shadow:0 3px 12px rgba(0,0,0,.03)
+}
+.progress-wrap{height:6px;background:#eee;border-radius:999px;margin-bottom:14px;overflow:hidden}
+.progress-fill{height:100%;background:#2563eb;border-radius:999px}
+.q-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.q-num{font-size:12px;color:#888}
+.q-score{font-size:12px;font-weight:700;color:#2563eb}
+.q-type{display:inline-block;padding:4px 10px;border-radius:999px;background:#f3f4f6;color:#374151;font-size:11px;font-weight:700;margin-bottom:8px}
+.q-text{font-size:15px;font-weight:700;line-height:1.75;margin-bottom:10px}
+.code-box{
+  background:#0f172a;color:#e5e7eb;border-radius:10px;padding:13px 14px;overflow:auto;
+  font-size:13px;line-height:1.7;margin-bottom:12px;white-space:pre-wrap;border:1px solid #1e293b
+}
+.opts{margin-bottom:12px}
+.opt{
+  display:block;width:100%;padding:12px 14px;margin-bottom:8px;border:1px solid #e0e0db;
+  background:#fff;color:#1a1a18;text-align:left;font-size:13px;line-height:1.65
+}
+.opt.correct{background:#f0fdf4;border-color:#16a34a;color:#15803d;font-weight:700}
+.opt.wrong{background:#fef2f2;border-color:#dc2626;color:#b91c1c}
+.opt.reveal{background:#f0fdf4;border-color:#16a34a;color:#15803d;font-weight:700}
+.explain{
+  font-size:13px;color:#555;background:#f9f9f6;border-radius:10px;padding:12px 14px;
+  line-height:1.7;margin-bottom:12px;border-left:4px solid #ddd
+}
+.explain.ok{border-left-color:#16a34a;background:#f0fdf4;color:#166534}
+.explain.ng{border-left-color:#dc2626;background:#fef2f2;color:#7f1d1d}
+.nav-row{text-align:right}
+.next-btn{
+  padding:12px 16px;border:1px solid #1a1a18;background:#1a1a18;color:#fff;font-size:14px;font-weight:700
+}
+.result{text-align:center;padding:18px 8px}
+.res-score{font-size:42px;font-weight:800;margin-bottom:4px}
+.res-label{font-size:14px;color:#888;margin-bottom:8px}
+.res-grade{font-size:19px;font-weight:800;margin-bottom:12px}
+.res-desc{font-size:13px;color:#666;line-height:1.65;margin-bottom:16px}
+.retry-btn{
+  padding:12px 16px;border:1px solid #1a1a18;background:#fff;color:#1a1a18;
+  font-size:14px;font-weight:700;margin:4px
+}
+.small-muted{font-size:12px;color:#777;line-height:1.6}
+.note-item{padding:12px 0;border-bottom:1px solid #ececec}
+.note-item:last-child{border-bottom:none}
+.stats-grid{margin:14px 0}
+.stat-card{background:#fafaf9;border:1px solid #e7e5e4;border-radius:10px;padding:14px;margin-bottom:8px}
+.stat-label{font-size:12px;color:#777;margin-bottom:4px}
+.stat-value{font-size:24px;font-weight:800}
+.loading{
+  background:#fff;border:1px solid #e8e8e4;border-radius:14px;padding:18px;text-align:center;font-size:14px;color:#666
+}
+.footer-note{margin-top:10px;font-size:12px;color:#777;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>ICT와 소프트웨어 — 고난도 예상문제 100제</h1>
+  <p class="subtitle">기존 문제보다 선지 구분을 훨씬 어렵게 만든 상향판이다. 비슷한 개념 비교, 부분적으로 맞는 선지, 흐름 연결형 함정을 중심으로 구성했다.</p>
+  <div class="notice">구성은 기존과 동일하게 20문제 × 5세트다. 정답 즉시 확인, 해설, 오답노트, 오답 다시풀기, 틀린유형 통계를 그대로 유지했다. 이번엔 진짜 생각하고 골라야 한다.</div>
+
+  <div class="set-bar" id="setBar"></div>
+  <div class="toolbar">
+    <button class="tool-btn" id="btnWrong">❌ 오답노트</button>
+    <button class="tool-btn" id="btnRetry">🔁 오답 다시풀기</button>
+    <button class="tool-btn" id="btnStats">📊 틀린유형 통계</button>
+    <button class="tool-btn" id="btnNormal">📚 원래 문제로</button>
+  </div>
+
+  <div class="card" id="quizArea">
+    <div class="loading">문제 불러오는 중...</div>
+  </div>
+  <p class="footer-note">※ 정답을 누르면 해설이 바로 나오고, 틀린 문제는 오답노트에 자동 누적된다. 이번 버전은 일부 선지가 부분적으로만 맞도록 설계되어, 키워드만 보고 찍으면 위험하다.</p>
+</div>
+
+<script>
+var DATA = [[{"type": "고난도 개념", "q": "다음 중 강의자료의 흐름에 가장 부합하는 설명은?", "opts": ["디지털 전환의 핵심은 물리 매체를 완전히 없애는 데 있다.", "디지털 전환은 저장·복제·검색의 효율을 높이지만 동시에 불법복제·저작권·소유 개념 변화까지 동반한다.", "아날로그와 디지털의 차이는 음질 문제에만 한정된다.", "디지털 전환은 개인화 서비스와는 본질적으로 무관하다."], "ans": 1, "exp": "강의자료는 디지털화가 단순한 기술 변화가 아니라 복제·유통·검색·개인화와 함께 저작권, 소유의 종말 같은 구조 변화까지 가져온다고 설명한다."}, {"type": "고난도 개념", "q": "4차 산업혁명을 설명하는 문장으로 가장 적절한 것은?", "opts": ["3차 산업혁명 기술을 단순히 더 빠르게 만든 단계다.", "개별 기술의 성능 향상보다 ICT 융합을 통한 초연결과 초지능의 산업 구조 재편에 초점이 있다.", "증기기관과 전기 기술을 디지털 방식으로 바꾼 단계다.", "제조업 자동화만을 의미하며 서비스 산업 변화는 핵심이 아니다."], "ans": 1, "exp": "강의자료에서 4차 산업혁명은 빅데이터, AI, IoT, 로봇 등이 연결되며 산업 전반이 재편되는 초연결·초지능의 융합 혁명으로 설명된다."}, {"type": "고난도 개념", "q": "다음 중 4차 산업혁명 시대의 직업 변화에 대한 해석으로 가장 타당한 것은?", "opts": ["모든 직업이 동일한 비율로 자동화 압력을 받는다.", "반복적이고 규칙 기반인 업무일수록 자동화 가능성이 상대적으로 크다.", "창의성이 조금이라도 개입되면 AI의 영향은 완전히 사라진다.", "서비스업은 제조업과 달리 자동화와 거의 무관하다."], "ans": 1, "exp": "강의자료는 콜센터 상담원, 계산원, 단순 기사 작성, 운전 직군 등을 예로 들며 반복적·규칙적 업무가 더 큰 자동화 압력을 받는다고 시사한다."}, {"type": "고난도 개념", "q": "AI, 머신러닝, 딥러닝의 관계를 가장 엄밀하게 설명한 것은?", "opts": ["머신러닝은 딥러닝의 특수한 경우이고, 딥러닝은 인공지능 전체와 동치다.", "딥러닝은 인공지능과 독립된 별도 분야다.", "인공지능은 상위 개념이고, 머신러닝은 그 안의 접근법이며, 딥러닝은 인공신경망 기반 머신러닝이다.", "딥러닝은 오직 생성형 AI를 가리키는 말이다."], "ans": 2, "exp": "강의자료는 AI ⊃ 머신러닝 ⊃ 딥러닝의 포함 관계를 명확히 제시한다."}, {"type": "고난도 개념", "q": "튜링 테스트의 취지를 가장 정확히 반영한 설명은?", "opts": ["기계가 인간보다 더 빠르게 계산하면 지능을 인정하는 기준", "인간과 기계의 내부 작동 원리가 유사한지 측정하는 기준", "응답 결과만 보고 인간과 컴퓨터를 구분하기 어려우면 기계의 사고 가능성을 논의하는 기준", "자연어 처리 모델의 정답률을 수치화하는 현대 벤치마크"], "ans": 2, "exp": "튜링 테스트는 내부 메커니즘보다 대화 결과만 보고 인간과 기계를 구분하기 어려운지를 보는 개념이다."}, {"type": "고난도 개념", "q": "생성형 AI에 대한 설명으로 가장 적절하지 않은 것은?", "opts": ["사전 학습된 데이터 패턴을 바탕으로 새로운 산출물을 생성한다.", "텍스트, 이미지, 음악, 영상, 코드 생성으로 확장될 수 있다.", "본질적으로 검색 결과를 그대로 복사해 붙이는 기술과 동일하다.", "GAN, LLM, Transformer, Diffusion 같은 기술과 연결된다."], "ans": 2, "exp": "생성형 AI는 기존 자료를 단순 검색·복사하는 것이 아니라 학습된 패턴을 바탕으로 새로운 산출물을 만든다."}, {"type": "고난도 개념", "q": "강의자료에서 생성형 AI의 위험을 가장 적절히 묶은 것은?", "opts": ["연산 속도 저하만이 유일한 문제다.", "딥페이크, 그럴싸한 오답, 저작권 문제, 개인정보·전력 문제 등이 함께 논의된다.", "하드웨어 가격 상승만 문제다.", "위험은 모두 해결되어 현재는 기술적 장점만 남아 있다."], "ans": 1, "exp": "자료는 생성형 AI의 문제를 단순 정확도 문제가 아니라 허위 생성, 딥페이크, 저작권, 보안, 에너지까지 포함해 설명한다."}, {"type": "고난도 개념", "q": "다음 중 AI의 '신뢰할 수 없는 결과'에 대한 설명으로 가장 적절한 것은?", "opts": ["항상 완전히 엉터리 답만 내므로 쉽게 구분된다.", "정답이 아니더라도 그럴듯한 결과를 내어 사용자가 속기 쉽다.", "오직 이미지 생성 모델에서만 발생한다.", "데이터 양이 많아지면 원리상 완전히 사라진다."], "ans": 1, "exp": "강의자료는 AI가 틀렸지만 그럴듯한 답변을 산출할 수 있음을 중요한 한계로 제시한다."}, {"type": "고난도 개념", "q": "다음 중 로봇과 휴머노이드 파트의 해석으로 가장 타당한 것은?", "opts": ["로봇 활용은 제조업에만 한정되고 서비스·돌봄 분야는 예외다.", "휴머노이드는 단순 오락용 개념으로만 제시된다.", "웨어러블 로봇은 보행 보조나 근력 증강처럼 인간 능력 보완과 연결된다.", "가사 로봇은 강의자료 범위에 포함되지 않는다."], "ans": 2, "exp": "자료는 웨어러블 로봇을 노약자·환자·장애인 보행 보조와 건설·군사 분야 근력 증강과 연결한다."}, {"type": "고난도 개념", "q": "다음 중 강의자료에서 '디지털 세상의 음악'이 가져온 변화로 보기 어려운 것은?", "opts": ["앨범 단위에서 곡 단위 유통으로의 이동", "개인화 추천과 구독형 서비스의 등장", "복제 비용 상승으로 인한 진입장벽 강화", "불법 유통 문제를 둘러싼 새로운 갈등"], "ans": 2, "exp": "디지털 음악은 오히려 복제·유통 비용을 크게 낮췄다."}, {"type": "고난도 개념", "q": "다음 중 '소유의 종말'이라는 표현과 가장 잘 연결되는 현상은?", "opts": ["음원을 물리 매체로만 구매해야 하는 구조", "월정액 구독 기반 스트리밍 확산", "고가 장비가 없으면 음악을 들을 수 없는 구조", "오프라인 음반 대여점의 성장"], "ans": 1, "exp": "강의자료는 디지털 플랫폼과 스트리밍으로 소유보다 접근이 중요해지는 변화를 설명한다."}, {"type": "고난도 개념", "q": "4차 산업혁명과 AI 파트를 함께 고려할 때 가장 적절한 설명은?", "opts": ["AI는 4차 산업혁명과 별개로 고립된 계산 기술이다.", "4차 산업혁명은 연결만 강조하며 지능화는 핵심이 아니다.", "AI는 빅데이터, 네트워크, 로봇 등과 결합될 때 산업 전반의 자동화·개인화·지능화를 강화한다.", "AI는 주로 과거 산업혁명 설명에만 사용된다."], "ans": 2, "exp": "자료는 4차 산업혁명을 ICT 융합의 결과로 설명하며, AI가 데이터·연결성·자동화와 만나 구조 변화를 낳는다고 본다."}, {"type": "고난도 개념", "q": "다음 중 강의자료가 암시하는 '디지털 플랫폼의 경제적 특징'으로 가장 적절한 것은?", "opts": ["복제 비용이 높아 롱테일 구조가 약해진다.", "검색과 추천 기술이 비주류 콘텐츠 접근 가능성을 높일 수 있다.", "베스트셀러 중심 구조는 항상 더 강화된다.", "개인화 추천은 공급자보다 오프라인 매장의 역할을 강화한다."], "ans": 1, "exp": "온라인 서점, eBook, 추천 시스템은 롱테일 구조와 개인화된 접근을 가능하게 한다."}, {"type": "고난도 개념", "q": "다음 중 생성형 AI와 일반 AI 활용 사례를 가장 적절히 구분한 것은?", "opts": ["객체 인식은 생성형 AI, AI 그림은 판별형 AI다.", "의료 영상 판독은 생성형 AI의 전형, 시나리오 작성은 비생성형 AI다.", "이미지 캡션 생성과 시나리오 작성은 생성성이 강한 활용이고, 얼굴 식별은 판별·분류 성격이 강하다.", "모든 AI 활용은 생성형 AI로 통일해도 무방하다."], "ans": 2, "exp": "자료상 얼굴 식별과 객체 인식은 판별·분류 계열, 캡션 생성·시나리오 작성은 생성적 성격이 강하다."}, {"type": "고난도 개념", "q": "강의자료에서 AI의 '이론적 근거 부족'이 뜻하는 바에 가장 가까운 것은?", "opts": ["수학이 전혀 없다는 뜻", "왜 잘되는지, 어떤 조건에서 잘되고 실패하는지 충분히 설명하기 어렵다는 문제", "학습 데이터가 하나도 필요 없다는 뜻", "반드시 실행이 불가능하다는 뜻"], "ans": 1, "exp": "자료는 AI가 잘 되는 이유와 조건, 한계를 충분히 해석하기 어려운 점을 문제로 든다."}, {"type": "고난도 개념", "q": "다음 중 인공지능 문제점 파트와 생성형 AI 활용 파트를 함께 봤을 때 가장 타당한 결론은?", "opts": ["활용 사례가 많으므로 위험 논의는 의미가 없다.", "편리성과 생산성 증대에도 불구하고 결과 검증과 윤리적 통제가 동시에 필요하다.", "온디바이스 AI가 등장하면 저작권 문제는 자동 소멸한다.", "멀티모달 AI는 편향 문제와 무관하다."], "ans": 1, "exp": "강의자료는 활용 확대와 동시에 신뢰성·편향·저작권·보안 등의 문제를 함께 고려해야 함을 강조한다."}, {"type": "고난도 개념", "q": "다음 중 'AI로 대체 가능한 직업' 목록을 가장 타당하게 해석한 것은?", "opts": ["이미 모든 해당 직업이 완전히 사라졌음을 뜻한다.", "해당 직업의 모든 고차원적 판단까지 완전히 자동화되었음을 뜻한다.", "직업 전체보다 특정 기능·업무 단위가 대체 압력을 받는다는 관점으로 읽는 것이 자연스럽다.", "목록에 없는 직업은 AI와 완전히 무관하다는 뜻이다."], "ans": 2, "exp": "자료의 목록은 직업 전체의 소멸 선언이라기보다 기능 단위 자동화 압력을 보여주는 것으로 해석하는 것이 타당하다."}, {"type": "고난도 개념", "q": "다음 중 강의자료의 관점과 가장 어긋나는 설명은?", "opts": ["AI는 산업적 효율을 높일 수 있지만 사회적 비용도 유발한다.", "로봇은 물류·가사·재난 등 다양한 영역으로 확장된다.", "생성형 AI는 새로운 콘텐츠를 만들 수 있지만 항상 사실 검증을 보장하지는 않는다.", "4차 산업혁명의 핵심은 오프라인 물리 매체로의 복귀다."], "ans": 3, "exp": "4차 산업혁명은 오프라인 복귀가 아니라 ICT 융합 기반의 연결성과 지능화를 핵심으로 한다."}, {"type": "고난도 개념", "q": "다음 중 강의자료에서 로봇과 AI의 관계를 가장 적절히 설명한 것은?", "opts": ["로봇은 물리적 장치, AI는 그 로봇이나 서비스 시스템을 더 지능적으로 만드는 기술로 결합될 수 있다.", "로봇과 AI는 같은 뜻이다.", "AI는 물리적 팔과 다리가 있어야만 성립한다.", "로봇은 반드시 AI가 있어야만 동작한다."], "ans": 0, "exp": "로봇은 물리 시스템이고 AI는 학습·판단 기능을 제공하는 기술로 결합될 수 있지만 둘은 동일 개념이 아니다."}, {"type": "고난도 개념", "q": "디지털 전환, 생성형 AI, 4차 산업혁명 파트를 종합할 때 가장 적절한 시험형 결론은?", "opts": ["핵심은 각각의 기술 정의만 외우는 것이다.", "기술 간 연결 고리 없이 단편 암기로도 충분하다.", "기술이 사회 구조, 유통 방식, 직업 변화, 윤리 문제까지 연결된다는 흐름을 이해해야 한다.", "4차 산업혁명은 AI와 별개이므로 연결해 공부하면 안 된다."], "ans": 2, "exp": "교수형 문제는 정의 자체보다 개념 간 연결, 변화의 방향, 장단점 통합 이해를 묻기 쉽다."}], [{"type": "고난도 개념", "q": "컴퓨터의 정의를 강의자료에 가장 충실하게 정리한 것은?", "opts": ["오직 숫자 계산만 수행하는 장치", "문자나 영상도 처리하지만 본질적으로는 데이터를 입력받아 연산·처리하여 출력 또는 저장하는 장치", "인터넷에 연결된 전자기기 전체를 뜻하는 말", "사람처럼 스스로 사고하는 장치만을 뜻함"], "ans": 1, "exp": "강의자료는 컴퓨터를 계산 장치로 보되, 문자·음성·영상 처리도 결국 연산으로 본다."}, {"type": "고난도 개념", "q": "데이터와 정보의 관계에 대한 설명으로 가장 적절한 것은?", "opts": ["정보를 처리하면 데이터가 된다.", "의미 없는 수치가 항상 정보다.", "데이터를 처리해 의미 있는 결과가 되었을 때 정보라 부른다.", "정보와 데이터는 문맥과 무관하게 완전히 같은 말이다."], "ans": 2, "exp": "자료는 데이터를 처리해 의미 있는 자료가 된 것을 정보라고 정의한다."}, {"type": "고난도 개념", "q": "ICT에 대한 설명으로 가장 적절한 것은?", "opts": ["IT에서 저장장치만 제거한 개념", "정보기술에 통신기술이 결합된 개념", "하드웨어만을 의미하는 말", "무선통신만 가리키는 축약어"], "ans": 1, "exp": "ICT는 Information Technology와 통신 기술의 결합이다."}, {"type": "고난도 개념", "q": "컴퓨터 동작의 요리 비유를 올바르게 연결한 것은?", "opts": ["CPU-창고, 메인메모리-주방장, 저장장치-작업대", "CPU-주방장, 메인메모리-작업대, 저장장치-창고", "CPU-레시피, GPU-손님, 저장장치-주방장", "메인메모리-재료, 저장장치-보조요리사"], "ans": 1, "exp": "자료는 CPU를 주방장, 메인 메모리를 작업대, 저장 장치를 창고에 비유한다."}, {"type": "고난도 개념", "q": "소프트웨어에 대한 설명으로 가장 적절하지 않은 것은?", "opts": ["하드웨어만으로는 원하는 작업을 완성하기 어렵기 때문에 필요하다.", "하드웨어를 조작하여 원하는 정보를 만들어 내는 절차와 규칙의 집합이다.", "물리적으로 만질 수 있는 장치의 묶음이다.", "응용 소프트웨어와 운영체제로 크게 구분할 수 있다."], "ans": 2, "exp": "물리적으로 만질 수 있는 장치는 하드웨어이고, 소프트웨어는 프로그램/절차의 집합이다."}, {"type": "고난도 개념", "q": "임베디드 시스템의 특징으로 가장 적절한 것은?", "opts": ["범용 PC와 본질적으로 동일하며 목적 제한이 없다.", "특정 목적에 최적화되어 있고, 입출력과 저장장치, 운영체제가 제한적일 수 있다.", "항상 키보드·마우스·대형 모니터를 기본 입력장치로 가진다.", "반드시 클라우드 서버를 통해서만 동작한다."], "ans": 1, "exp": "임베디드 시스템은 특정 목적의 전용 시스템이며 자원과 인터페이스가 제한적일 수 있다."}, {"type": "고난도 개념", "q": "펌웨어(Firmware)에 대한 설명으로 가장 적절한 것은?", "opts": ["항상 매 실행마다 인터넷에서 다운로드되는 소프트웨어", "ROM이나 플래시 메모리에 내장되어 변경 빈도가 낮은 기능을 수행하는 소프트웨어", "그래픽 연산 전용 하드웨어", "무선통신 프로토콜 자체"], "ans": 1, "exp": "자료는 펌웨어를 ROM/플래시 메모리에 내장된 소프트웨어로 설명한다."}, {"type": "고난도 개념", "q": "GPU에 대한 설명으로 가장 타당한 것은?", "opts": ["언제나 CPU보다 우수한 범용 처리 장치다.", "병렬성이 큰 작업에서 강점을 가지며, 딥러닝 연산에도 유용하다.", "저장 장치의 한 종류다.", "운영체제의 일부다."], "ans": 1, "exp": "GPU는 병렬 처리와 빠른 부동소수 연산에 강하며, 그 때문에 AI 학습/추론에도 활용된다."}, {"type": "고난도 개념", "q": "TPU와 NPU에 대한 설명으로 가장 적절한 것은?", "opts": ["둘 다 동일한 이름만 다른 저장 장치다.", "TPU는 Google의 행렬 연산 최적화 프로세서이고, NPU는 모바일 AI 추론에 적합한 저전력 프로세서다.", "NPU는 운영체제, TPU는 네트워크 프로토콜이다.", "둘 다 오직 3D 프린터 내부 모듈이다."], "ans": 1, "exp": "강의자료는 TPU와 NPU를 각각 학습/행렬 최적화와 모바일 추론 최적화 측면에서 설명한다."}, {"type": "고난도 개념", "q": "AP(Application Processor) 설명으로 맞는 것은?", "opts": ["CPU와 GPU, 통신 모듈 등을 하나의 칩에 집적한 SoC 형태와 연결된다.", "오직 배터리 관리용 칩이다.", "메인 메모리와 같은 뜻이다.", "프린터 헤드 제어기만을 뜻한다."], "ans": 0, "exp": "자료는 AP를 CPU, GPU, 무선통신 모듈 등을 하나의 칩에 통합한 SoC로 설명한다."}, {"type": "고난도 개념", "q": "다음 중 입력 장치와 센서에 대한 설명으로 가장 적절한 것은?", "opts": ["GPS 센서는 실내에서 더 정확하다.", "자이로 센서는 회전/방향 변화 감지와 연결되고, 가속도 센서는 움직임 감지와 연결된다.", "지문 센서는 출력 장치다.", "빛 센서는 오디오 볼륨만 측정한다."], "ans": 1, "exp": "자료는 자이로 센서를 회전속도, 가속도 센서를 이동 속도 감지와 연결해 설명한다."}, {"type": "고난도 개념", "q": "3D 프린터에 대한 설명으로 가장 적절한 것은?", "opts": ["문서만 출력하는 일반 프린터의 다른 이름", "입체물을 출력하며 보조기구, 부품, 건축, 신발 제작 연구 등과 연결된다.", "오직 군사용 무기 제작에만 사용된다.", "입력 장치의 일종이다."], "ans": 1, "exp": "자료는 3D 프린터를 입체물 출력 장치로 설명하며 다양한 산업 응용 사례를 제시한다."}, {"type": "고난도 개념", "q": "운영체제의 역할을 가장 적절히 설명한 것은?", "opts": ["응용 프로그램 없이 독립적으로만 존재하는 파일 형식", "모든 응용 프로그램이 하드웨어를 사용할 수 있도록 자원을 관리하고 인터페이스를 제공하는 시스템 소프트웨어", "오직 그래픽 편집 프로그램만 관리", "네트워크 케이블 규격"], "ans": 1, "exp": "운영체제는 하드웨어 자원 관리와 응용 소프트웨어 실행 기반 제공이 핵심 역할이다."}, {"type": "고난도 개념", "q": "GUI에 대한 설명으로 가장 적절한 것은?", "opts": ["오직 텍스트 명령만 사용하는 인터페이스", "아이콘, 창, 메뉴 등 그래픽 요소를 사용한 사용자 인터페이스", "네트워크 전송 프로토콜", "컴퓨터 내부 배선 구조"], "ans": 1, "exp": "GUI는 그래픽 기반 사용자 인터페이스다."}, {"type": "고난도 개념", "q": "UX에 대한 해석으로 가장 적절한 것은?", "opts": ["버튼 색상만 예쁘게 만드는 작업", "사용자가 시스템을 직관적이고 편하게 사용할 수 있도록 전체 경험을 설계하는 것", "메모리 용량을 늘리는 방법", "CPU 제조 공정"], "ans": 1, "exp": "UX는 단순 시각 요소가 아니라 전체 사용 경험 설계와 관련된다."}, {"type": "고난도 개념", "q": "고급 언어와 저급 언어에 대한 설명으로 가장 적절한 것은?", "opts": ["고급 언어는 사람이 이해하기 쉽고 생산성이 높으며, 저급 언어는 하드웨어와 가깝다.", "저급 언어가 항상 더 배우기 쉽다.", "고급 언어는 반드시 인터프리터로만 실행된다.", "저급 언어는 컴퓨터가 전혀 이해할 수 없다."], "ans": 0, "exp": "고급 언어는 사람 친화적, 저급 언어는 기계 친화적이라는 구도가 기본이다."}, {"type": "고난도 개념", "q": "컴파일러와 인터프리터 차이를 가장 적절히 설명한 것은?", "opts": ["둘은 의미상 완전히 같다.", "컴파일러는 전체 프로그램을 번역해 실행 파일을 만들고, 인터프리터는 보통 한 줄씩 해석·실행한다.", "인터프리터는 반드시 더 빠르다.", "컴파일러는 문법 오류를 확인할 수 없다."], "ans": 1, "exp": "교수형 문제에서는 전체 번역 대 실시간 해석·실행 구분이 중요하다."}, {"type": "고난도 개념", "q": "다음 중 컴퓨터 역사 흐름의 연결이 가장 적절한 것은?", "opts": ["주판 → 에니그마 → ENIAC → IC 칩 → 대화형 시스템 → 개인용 컴퓨터", "ENIAC → 주판 → 양자컴퓨터 → 파스칼 계산기", "대화형 시스템 → 천공 카드 → 주판 → 인터넷", "광학 컴퓨터 → ENIAC → 애플II → 네이피어 계산봉"], "ans": 0, "exp": "강의자료 흐름상 계산 도구, 암호화 장치, 전자식 컴퓨터, IC 칩, 대화형 시스템, PC 순으로 발전을 따라가는 것이 자연스럽다."}, {"type": "고난도 개념", "q": "양자컴퓨터에 대한 설명으로 가장 적절한 것은?", "opts": ["모든 문제를 무조건 빠르게 푸는 완전한 상위 장치", "큐비트로 0과 1이 확률적으로 공존할 수 있으며 특정 문제에서 큰 속도 향상을 기대하지만 오류 가능성도 존재한다.", "아날로그 음성통신 전용 컴퓨터", "CPU의 다른 이름"], "ans": 1, "exp": "자료는 양자컴퓨터의 가능성과 함께 확률 기반 연산의 오류 가능성도 언급한다."}, {"type": "고난도 개념", "q": "컴퓨터 vs 인간 파트의 취지를 가장 잘 반영한 것은?", "opts": ["컴퓨터는 생각을 못하므로 가치가 없다.", "인간은 속도에서만 컴퓨터를 이긴다.", "컴퓨터는 빠른 계산과 저장에 강하고, 인간은 문제 해결 알고리즘을 고안하는 데 강점이 있다.", "둘은 완전히 같은 방식으로 문제를 해결한다."], "ans": 2, "exp": "자료는 컴퓨터의 계산 능력과 인간의 사고·추론·알고리즘 고안 능력을 대비시킨다."}], [{"type": "고난도 개념", "q": "모든 데이터가 0과 1로 표현되는 이유를 가장 적절히 설명한 것은?", "opts": ["컴퓨터가 숫자 2를 싫어해서", "물리적으로 두 상태를 안정적으로 구분·저장·전송하기 쉽기 때문", "영어 알파벳이 2개뿐이라서", "메모리 가격과 무관한 전통적 관습일 뿐이라서"], "ans": 1, "exp": "천공카드, 자기 저장장치, 반도체 메모리 등은 모두 물리적으로 두 상태를 안정적으로 구분하기 쉬워 2진 표현에 유리하다."}, {"type": "고난도 개념", "q": "다음 중 비트, 바이트, 워드에 대한 설명으로 가장 적절한 것은?", "opts": ["바이트는 항상 CPU가 한 번에 처리하는 단위다.", "워드는 보통 CPU가 한 번에 처리하는 기본 데이터 크기와 연결된다.", "비트는 10개의 상태를 가진 최소 단위다.", "1바이트는 4비트다."], "ans": 1, "exp": "비트는 0/1 한 자리, 바이트는 8비트, 워드는 CPU 처리 기본 크기와 연결된다."}, {"type": "고난도 개념", "q": "N개의 서로 다른 정보를 표현하기 위한 최소 비트 수를 구하는 사고로 가장 알맞은 것은?", "opts": ["N을 10으로 나눈다.", "2의 거듭제곱이 N 이상이 되는 최소 지수를 찾는다.", "N이 홀수면 1비트, 짝수면 2비트다.", "무조건 N비트가 필요하다."], "ans": 1, "exp": "표현 비트 수는 2^k >= N을 만족하는 최소 k, 즉 ceil(log2 N)으로 이해하는 것이 맞다."}, {"type": "고난도 개념", "q": "16진수가 컴퓨터 표현에서 유용한 이유로 가장 적절한 것은?", "opts": ["사람이 10진수보다 직관적으로 더 좋아하기 때문", "4비트와 정확히 대응되어 긴 2진수를 더 짧고 읽기 쉽게 표현할 수 있기 때문", "실수만 표현할 수 있어서", "네트워크 전송에서만 사용 가능해서"], "ans": 1, "exp": "16진수 한 자리는 2진수 4비트와 대응되므로 내부 값을 짧게 표현하기 좋다."}, {"type": "고난도 개념", "q": "2의 보수 방식의 장점으로 가장 적절한 것은?", "opts": ["음수를 표현할 수 없게 하여 회로를 단순화한다.", "덧셈 회로를 중심으로 양수와 음수 연산을 비교적 통일적으로 처리할 수 있다.", "반드시 저장 용량을 절반으로 줄인다.", "실수 표현 오차를 제거한다."], "ans": 1, "exp": "2의 보수는 덧셈 회로를 활용해 음수 연산을 효율적으로 구현할 수 있다는 점이 핵심이다."}, {"type": "고난도 개념", "q": "부동소수점 실수 표현에 대한 설명으로 가장 적절한 것은?", "opts": ["실수는 항상 정확히 표현되므로 오차 문제가 없다.", "실수는 부호, 지수, 가수 형태로 저장되며 일부 값은 정확히 표현되지 않아 오차가 생길 수 있다.", "실수 표현에는 2진법이 사용되지 않는다.", "IEEE 754는 문자 코드 표준이다."], "ans": 1, "exp": "강의자료의 부동소수점 파트 핵심은 구조적 표현과 반올림/근사 오차 가능성이다."}, {"type": "고난도 개념", "q": "ASCII와 Unicode 관계를 가장 적절히 설명한 것은?", "opts": ["ASCII는 전 세계 모든 문자를 충분히 표현한다.", "Unicode는 ASCII를 완전히 무시하고 새로 만든 체계다.", "Unicode는 다양한 언어 문자를 포괄하려는 확장적 체계이며 ASCII보다 넓다.", "둘은 용량만 다르고 문자 집합은 완전히 동일하다."], "ans": 2, "exp": "ASCII는 제한적 문자 집합이고 Unicode는 훨씬 넓은 범위의 문자 표현을 목표로 한다."}, {"type": "고난도 개념", "q": "부울 논리에 대한 설명으로 가장 적절한 것은?", "opts": ["AND는 하나라도 참이면 참이다.", "OR는 둘 다 참일 때만 참이다.", "NOT은 참/거짓을 뒤집는다.", "부울 논리는 이미지 압축과만 관련된다."], "ans": 2, "exp": "AND, OR, NOT의 기본 의미 구분은 시험의 핵심 기초다."}, {"type": "고난도 개념", "q": "샘플링과 양자화의 관계로 가장 적절한 것은?", "opts": ["샘플링은 값을 단계화하고, 양자화는 시간축에서 뽑는다.", "샘플링은 일정 간격으로 값을 추출하고, 양자화는 그 값을 유한 단계로 근사한다.", "둘은 완전히 같은 과정이다.", "양자화는 오직 문자 데이터에서만 사용된다."], "ans": 1, "exp": "아날로그를 디지털로 바꾸는 대표 과정은 샘플링 후 양자화다."}, {"type": "고난도 개념", "q": "무손실 압축과 손실 압축의 차이를 가장 적절히 설명한 것은?", "opts": ["손실 압축은 항상 더 낮은 압축률을 가진다.", "무손실 압축은 복원 후 원본과 동일하고, 손실 압축은 일부 정보 손실을 허용해 더 높은 압축률을 얻을 수 있다.", "무손실 압축은 멀티미디어에 전혀 사용되지 않는다.", "손실 압축은 항상 오류 검출 기능을 포함한다."], "ans": 1, "exp": "손실 압축은 일부 정보 손실을 감수하고 용량을 더 줄이는 방식이다."}, {"type": "고난도 개념", "q": "스테가노그래피와 암호화의 차이를 가장 적절히 설명한 것은?", "opts": ["둘은 완전히 같은 기술이다.", "암호화는 내용을 알아보기 어렵게 만들고, 스테가노그래피는 메시지 존재 자체를 숨기는 데 초점이 있다.", "스테가노그래피는 항상 압축을 의미한다.", "암호화는 멀티미디어와 무관하다."], "ans": 1, "exp": "스테가노그래피는 '숨김', 암호화는 '내용 보호'에 초점이 있다."}, {"type": "고난도 개념", "q": "오류 검출과 오류 정정의 차이로 맞는 것은?", "opts": ["검출은 틀렸는지 확인, 정정은 원래 데이터를 복구하려는 것", "정정은 틀렸는지만 확인하고 복구는 못 한다.", "둘은 전혀 다른 분야라 연결되지 않는다.", "검출은 오직 무선통신에서만 필요하다."], "ans": 0, "exp": "오류 검출은 이상 여부 확인, 오류 정정은 원래 값을 되살리는 쪽까지 포함한다."}, {"type": "고난도 개념", "q": "CIA 3원칙에 대한 설명으로 가장 적절한 것은?", "opts": ["기밀성-누구나 자유 접근, 무결성-항상 빠른 처리, 가용성-암호화", "기밀성-허가된 사람만 접근, 무결성-변조 방지, 가용성-필요할 때 사용 가능", "기밀성-백업, 무결성-로그인, 가용성-방화벽", "셋은 동일 개념의 다른 번역일 뿐이다."], "ans": 1, "exp": "정보보호 3원칙은 confidentiality, integrity, availability다."}, {"type": "고난도 개념", "q": "인증과 인가의 관계에 대한 설명으로 가장 적절한 것은?", "opts": ["인가는 사용자가 누구인지 확인하고, 인증은 권한을 준다.", "인증은 신원 확인, 인가는 허용된 권한 범위 결정이다.", "둘은 네트워크 계층 용어라 보안과 무관하다.", "인증이 완료되면 인가는 항상 필요 없다."], "ans": 1, "exp": "인증과 인가를 바꿔 쓰는 함정이 매우 자주 나온다."}, {"type": "고난도 개념", "q": "대칭키와 공개키 암호 방식의 차이를 가장 적절히 설명한 것은?", "opts": ["대칭키는 항상 더 안전하고 키 교환 문제가 없다.", "공개키는 공개키와 개인키를 분리해 키 배포 문제를 완화할 수 있지만 일반적으로 대칭키보다 연산 부담이 크다.", "공개키는 복호화가 불가능하다.", "대칭키는 오직 해시 함수에만 사용된다."], "ans": 1, "exp": "공개키의 장점은 키 분배 문제 완화, 대칭키의 장점은 상대적 속도다."}, {"type": "고난도 개념", "q": "디지털 서명의 목적을 가장 적절히 설명한 것은?", "opts": ["데이터를 압축해 전송량을 줄인다.", "수신자가 송신자의 신원과 메시지 무결성을 확인할 수 있게 한다.", "무선통신 주파수를 재할당한다.", "패킷 손실을 복구한다."], "ans": 1, "exp": "디지털 서명은 무결성과 송신자 확인에 핵심적이다."}, {"type": "고난도 개념", "q": "방화벽에 대한 설명으로 가장 적절한 것은?", "opts": ["모든 악성코드를 무조건 제거하는 완전한 장치", "네트워크 경계에서 허용/차단 규칙을 적용해 접근을 통제하는 장치 혹은 기능", "암호키를 저장하는 반도체 메모리", "이미지 압축 알고리즘"], "ans": 1, "exp": "방화벽은 규칙 기반 접근 통제 장치다."}, {"type": "고난도 개념", "q": "TCP와 UDP의 차이를 가장 적절히 설명한 것은?", "opts": ["TCP는 비연결형, UDP는 연결형이다.", "TCP는 순서 보장·재전송 등 신뢰성에 강하고, UDP는 빠르지만 손실·순서 문제를 애플리케이션이 감수할 수 있다.", "UDP는 포트를 사용하지 않는다.", "TCP는 인터넷과 무관하다."], "ans": 1, "exp": "시험에서는 TCP의 신뢰성, UDP의 경량성과 속도 차이를 정확히 구분해야 한다."}, {"type": "고난도 개념", "q": "IP 주소와 MAC 주소의 관계를 가장 적절히 설명한 것은?", "opts": ["둘 다 같은 개념의 다른 이름이다.", "IP는 논리적 주소, MAC은 네트워크 인터페이스의 물리적 주소로 이해할 수 있다.", "MAC은 인터넷 도메인 이름이다.", "IP는 사용자 비밀번호를 저장한다."], "ans": 1, "exp": "IP와 MAC은 계층과 역할이 다르다."}, {"type": "고난도 개념", "q": "라우터의 역할을 가장 적절히 설명한 것은?", "opts": ["문서를 출력하는 장치", "수신 신호를 소리로 바꾸는 장치", "목적지 IP를 보고 다음 전달 경로를 결정하는 네트워크 장비", "CPU 대신 수학 연산만 수행하는 장치"], "ans": 2, "exp": "라우터는 네트워크 경로를 결정하는 장비다."}], [{"type": "고난도 개념", "q": "주파수와 파장의 관계를 가장 적절히 해석한 것은?", "opts": ["주파수가 높을수록 파장이 길어진다.", "주파수와 파장은 서로 비례한다.", "주파수가 높을수록 파장은 짧아진다.", "주파수와 파장은 서로 독립적이다."], "ans": 2, "exp": "λ = c / f 이므로 주파수가 높아질수록 파장은 짧아진다."}, {"type": "고난도 개념", "q": "고주파 신호의 특징으로 가장 적절한 것은?", "opts": ["전송 속도는 낮지만 전송 범위는 항상 넓다.", "단위 시간당 전달 정보량이 많을 수 있으나 감쇄가 커 전송 범위가 짧아질 수 있다.", "직진성이 약해 장애물 투과가 항상 유리하다.", "기지국 수요와 무관하다."], "ans": 1, "exp": "자료는 고주파의 장점과 단점을 함께 제시한다. 속도와 범위의 상충 관계가 핵심이다."}, {"type": "고난도 개념", "q": "안테나 길이와 주파수의 관계를 가장 적절히 설명한 것은?", "opts": ["고주파일수록 안테나가 대체로 짧아진다.", "저주파일수록 안테나가 대체로 짧아진다.", "안테나 길이는 파장과 무관하다.", "안테나 길이는 오직 배터리 용량으로 결정된다."], "ans": 0, "exp": "안테나는 파장과 관련되고, 고주파일수록 파장이 짧아져 안테나도 짧아진다."}, {"type": "고난도 개념", "q": "면허 대역과 비면허 대역을 가장 적절히 구분한 것은?", "opts": ["비면허 대역은 어떤 규제도 받지 않는다.", "면허 대역은 특정 사업자/서비스에 독점 할당될 수 있고, 비면허 대역은 공존 원칙 아래 자유롭게 사용되나 간섭 보호가 약하다.", "면허 대역은 오직 위성용, 비면허 대역은 오직 군사용이다.", "비면허 대역에서는 Wi‑Fi와 Bluetooth를 사용할 수 없다."], "ans": 1, "exp": "비면허 대역도 규제는 존재하지만 특정 사업자의 독점 사용이 아니라 공존 사용이라는 점이 중요하다."}, {"type": "고난도 개념", "q": "위성통신의 장단점을 가장 균형 있게 설명한 것은?", "opts": ["지연이 매우 작고 구축비도 낮아 가장 이상적이다.", "넓은 지역 서비스와 재해 영향 완화에 강점이 있지만 지연과 비용이 큰 편이다.", "오직 실내 통신에 적합하다.", "일반 이동통신보다 항상 더 빠르다."], "ans": 1, "exp": "위성통신은 커버리지 장점과 지연·비용 단점이 함께 제시된다."}, {"type": "고난도 개념", "q": "GPS에 대한 설명으로 가장 적절한 것은?", "opts": ["위성 하나만 잡히면 충분하다.", "정확한 시각 정보를 가진 여러 위성 신호의 시간차를 이용해 위치를 추정한다.", "실내가 야외보다 훨씬 정확하다.", "GPS는 오직 군사용 미사일에서만 쓸 수 있다."], "ans": 1, "exp": "GPS는 복수 위성 신호와 시간차 계산을 기반으로 위치를 산출한다."}, {"type": "고난도 개념", "q": "Wi‑Fi에 대한 설명으로 가장 적절한 것은?", "opts": ["IEEE 802.11 계열 WLAN 표준이며 AP를 통한 접속과 직접 접속(Wi‑Fi Direct) 모두 가능하다.", "항상 면허 대역에서만 동작한다.", "이동통신망처럼 전국 고속 이동성을 전제로 한다.", "Bluetooth와 완전히 같은 표준이다."], "ans": 0, "exp": "Wi‑Fi는 대표적인 무선 근거리 통신으로 AP 기반 접속과 Direct 연결 모두 가능하다."}, {"type": "고난도 개념", "q": "Bluetooth와 ZigBee를 비교할 때 가장 적절한 것은?", "opts": ["둘 다 전국 이동통신 대체용이다.", "Bluetooth는 기기간 저전력 연결에 강하고, ZigBee는 센서 네트워크 같은 저속·저전력·다수 노드 연결에 더 적합하다.", "ZigBee는 고속 동영상 스트리밍 전용이다.", "Bluetooth는 반드시 면허 대역에서만 동작한다."], "ans": 1, "exp": "Bluetooth와 ZigBee는 모두 WPAN 계열이지만 쓰임새와 토폴로지, 노드 수 감각이 다르다."}, {"type": "고난도 개념", "q": "ZigBee의 특징으로 가장 적절한 것은?", "opts": ["초고속·초저지연 영상통화 중심", "소형·저속·저전력·저가이며 mesh 토폴로지와 센서 네트워크 응용에 강점", "위성통신과 동일 구조", "오직 노드 2개만 연결 가능"], "ans": 1, "exp": "ZigBee는 센서/자동화 환경에 맞는 저전력 다노드 네트워크로 설명된다."}, {"type": "고난도 개념", "q": "다음 중 무선 네트워크 분류 연결이 가장 적절한 것은?", "opts": ["WLAN-이동통신, WMAN-Bluetooth, WPAN-Wi‑Fi", "WLAN-Wi‑Fi, WPAN-Bluetooth/ZigBee, WMAN-이동통신", "WLAN-GPS, WPAN-위성통신, WMAN-NFC", "WLAN-NFC, WPAN-셀룰러, WMAN-프린터"], "ans": 1, "exp": "강의자료는 WLAN, WPAN, WMAN을 각각 Wi‑Fi, Bluetooth/ZigBee, 이동통신과 연결한다."}, {"type": "고난도 개념", "q": "1G~5G 이동통신 흐름을 가장 적절히 정리한 것은?", "opts": ["1G 아날로그 음성 → 2G 디지털/SMS → 3G 인터넷/영상통화 → 4G All‑IP 고속데이터 → 5G 초고속·초저지연·초연결", "1G 디지털 문자 → 2G 아날로그 → 3G 음성 전용 → 4G GPS → 5G Wi‑Fi", "1G와 2G는 차이가 거의 없고 3G부터만 이동통신이다.", "5G는 4G보다 항상 더 넓은 전송 범위만을 의미한다."], "ans": 0, "exp": "세대별 핵심 서비스와 기술 방향을 순서대로 정리하는 것이 기본이다."}, {"type": "고난도 개념", "q": "셀룰라 이동통신의 핵심 아이디어를 가장 잘 설명한 것은?", "opts": ["기지국 하나로 전국을 덮고 주파수는 재사용하지 않는다.", "넓은 지역을 여러 셀로 나누고 주파수 재사용을 통해 효율을 높인다.", "모든 셀은 항상 같은 주파수를 사용해 간섭을 줄인다.", "셀 경계는 성능과 무관하다."], "ans": 1, "exp": "셀 분할과 주파수 재사용이 셀룰라의 핵심이며, 간섭·핸드오버가 따라붙는다."}, {"type": "고난도 개념", "q": "핸드오프(핸드오버)에 대한 설명으로 가장 적절한 것은?", "opts": ["배터리를 다른 기기로 교환하는 절차", "사용자가 셀을 이동할 때 통신을 유지하며 기지국 연결을 전환하는 기능", "주파수를 암호화하는 과정", "오직 위성통신에서만 필요한 기능"], "ans": 1, "exp": "핸드오프는 이동 중 통신 지속성을 보장하기 위한 셀룰라 핵심 기능이다."}, {"type": "고난도 개념", "q": "하드 핸드오프와 소프트 핸드오프 비교로 맞는 것은?", "opts": ["하드는 새 채널을 먼저 열고, 소프트는 기존 채널을 먼저 끊는다.", "하드는 끊고 연결, 소프트는 먼저 연결 후 끊는 방식으로 이해할 수 있다.", "둘은 같은 개념의 다른 이름이다.", "둘 다 간섭 제어와 무관하다."], "ans": 1, "exp": "자료는 하드 핸드오프를 끊고 연결, 소프트 핸드오프를 먼저 연결 후 전환으로 설명한다."}, {"type": "고난도 개념", "q": "FDMA, TDMA, CDMA, OFDMA를 구분할 때 가장 적절한 것은?", "opts": ["FDMA-시간, TDMA-주파수, CDMA-위성, OFDMA-코드", "FDMA-주파수 분할, TDMA-시간 분할, CDMA-코드 분할, OFDMA-시간+주파수 분할", "FDMA와 TDMA는 같은 방식, CDMA와 OFDMA도 같은 방식", "모두 완전히 동일한 방식이다."], "ans": 1, "exp": "각 다중접속 방식의 분할 기준을 바르게 매칭하는 것이 핵심이다."}, {"type": "고난도 개념", "q": "CDMA의 장점을 가장 적절히 설명한 것은?", "opts": ["각 사용자가 서로 다른 코드를 사용해 같은 대역을 동시에 쓸 수 있어 주파수 효율과 가입자 용량을 높일 수 있다.", "사용자 수가 늘어날수록 간섭이 완전히 사라진다.", "수신기가 단순해진다.", "주파수를 절대 재사용하지 않아도 된다."], "ans": 0, "exp": "자료는 CDMA의 장점으로 전체 대역 동시 사용에 따른 효율 상승을 들지만, 전력 제어 필요성과 수신 복잡성도 함께 언급한다."}, {"type": "고난도 개념", "q": "5G 서비스 분류 eMBB, URLLC, mMTC를 가장 적절히 연결한 것은?", "opts": ["eMBB-대규모 IoT, URLLC-대용량 영상, mMTC-원격수술", "eMBB-초고용량 광대역, URLLC-고신뢰 초저지연, mMTC-대규모 기기 연결", "eMBB-문자메시지, URLLC-음성, mMTC-사진 촬영", "셋 다 같은 뜻이다."], "ans": 1, "exp": "5G의 세 축은 광대역, 초저지연, 초연결이다."}, {"type": "고난도 개념", "q": "5G의 주요 기술과 가장 거리가 먼 것은?", "opts": ["massive MIMO", "beamforming", "network slicing", "천공 카드 입력"], "ans": 3, "exp": "대용량 다중 안테나, 빔포밍, 네트워크 슬라이싱은 5G 핵심 기술이지만 천공 카드는 전혀 무관하다."}, {"type": "고난도 개념", "q": "5G mmWave의 특징으로 가장 적절한 것은?", "opts": ["속도는 낮지만 전국 커버리지가 가장 쉽다.", "고속 전송이 가능하지만 도달거리가 짧고 장애물 투과가 약해 small cell과 빔포밍이 중요하다.", "항상 2.4GHz 대역만 사용한다.", "간섭과 핸드오버 문제가 자동으로 사라진다."], "ans": 1, "exp": "밀리미터파는 초고속 가능성과 짧은 반경·장애물 취약성이라는 양면성이 핵심이다."}, {"type": "고난도 개념", "q": "6G에 대한 설명으로 가장 적절한 것은?", "opts": ["5G를 완전히 폐기하고 다시 2G로 돌아가는 기술", "THz 대역, AI 결합, 비지상 통신, 디지털 트윈·홀로그램 같은 융합 서비스와 연결되는 차세대 방향성", "오직 음성 품질 향상만 목표로 한다.", "주파수 재사용을 없애는 것이 핵심이다."], "ans": 1, "exp": "자료는 6G를 THz, AI 융합, 비지상 통신, 실감형 서비스 방향으로 제시한다."}], [{"type": "고난도 종합", "q": "다음 중 강의자료 전체 흐름을 가장 잘 요약한 것은?", "opts": ["컴퓨터 구조와 무선통신은 별개이므로 한 시험에서 연결해 묻지 않는다.", "디지털 전환, 데이터 표현, 컴퓨터 구조, AI, 네트워크, 무선통신은 '정보를 만들고 처리하고 전달하는 방식'이라는 하나의 흐름으로 연결된다.", "ICT는 오직 네트워크만 공부하는 과목이다.", "4차 산업혁명은 컴퓨터 역사보다 먼저 이해해야 하므로 둘은 연결하지 않는다."], "ans": 1, "exp": "교수형 문제는 파트별 정의 암기보다 '정보의 생성-처리-전달-지능화' 흐름을 연결해 묻기 쉽다."}, {"type": "고난도 종합", "q": "디지털 전환과 데이터 표현 파트를 연결할 때 가장 적절한 설명은?", "opts": ["디지털화는 0과 1 표현과 무관하다.", "실세계 연속 정보를 샘플링·양자화해 비트열로 바꾸기 때문에 복제와 처리의 효율이 높아진다.", "디지털 전환의 핵심은 아날로그 신호를 없애는 것이지 데이터화가 아니다.", "디지털 데이터는 압축이 불가능하다."], "ans": 1, "exp": "실세계 정보를 디지털 비트열로 바꾸는 과정이 디지털 처리의 출발점이다."}, {"type": "고난도 종합", "q": "AI 문제점과 정보보안 파트를 함께 고려할 때 가장 적절한 설명은?", "opts": ["AI가 발전하면 개인정보 보호 문제는 자동 해결된다.", "딥페이크, 허위 생성, 데이터 편향은 기술 문제이면서 동시에 사회적·보안적 문제이기도 하다.", "보안은 암호화만 잘하면 충분하고 AI 결과 검증은 필요 없다.", "AI는 정보보안과 연결될 수 없다."], "ans": 1, "exp": "딥페이크, 개인정보, 허위 정보 문제는 AI와 정보보안/윤리의 접점이다."}, {"type": "고난도 종합", "q": "임베디드 시스템과 온디바이스 AI를 연결할 때 가장 적절한 설명은?", "opts": ["둘은 모두 클라우드 의존만을 의미한다.", "특정 목적 장치 내부에서 제한된 자원으로 기능을 수행한다는 점에서 연결될 수 있다.", "임베디드 시스템은 AI를 절대 탑재할 수 없다.", "온디바이스 AI는 반드시 대형 서버용 기술이다."], "ans": 1, "exp": "임베디드 기기나 스마트폰 내부에서 AI 추론을 수행하는 관점은 자원 제약 환경과 연결된다."}, {"type": "고난도 종합", "q": "GPU, TPU, NPU와 생성형 AI를 연결한 설명으로 가장 적절한 것은?", "opts": ["생성형 AI는 오직 CPU 하나로만 처리해야 한다.", "대규모 학습과 추론에는 병렬성 높은 연산 장치가 중요하며 GPU/TPU/NPU는 목적과 환경에 따라 역할이 다르다.", "NPU는 저장장치라 생성형 AI와 무관하다.", "TPU는 문자 코드 변환 장치다."], "ans": 1, "exp": "생성형 AI는 대규모 행렬 연산이 핵심이므로 GPU/TPU/NPU의 역할 구분이 중요하다."}, {"type": "고난도 종합", "q": "다음 중 '검색'과 '생성'의 차이를 시험형으로 가장 잘 설명한 것은?", "opts": ["검색은 항상 틀리고 생성은 항상 맞다.", "검색은 존재하는 정보를 찾는 데 가깝고, 생성은 학습 패턴을 바탕으로 새로운 결과를 산출하는 데 가깝다.", "생성은 데이터가 전혀 필요 없다.", "검색과 생성은 운영체제의 두 종류다."], "ans": 1, "exp": "이 구분은 생성형 AI 파트에서 매우 자주 낚시 포인트로 나온다."}, {"type": "고난도 종합", "q": "TCP/IP와 셀룰러 이동통신을 함께 공부할 때 가장 적절한 태도는?", "opts": ["TCP/IP는 유선만, 셀룰러는 무선만이므로 서로 전혀 무관하다.", "무선 구간에서도 결국 상위 계층 서비스는 IP 기반으로 동작할 수 있으므로 계층 개념을 분리해 이해해야 한다.", "셀룰러에서는 포트 개념이 사라진다.", "5G는 TCP를 완전히 제거했다."], "ans": 1, "exp": "4G 이후 All-IP 개념처럼 이동통신도 상위 서비스는 IP 기반으로 통합되어 이해할 수 있다."}, {"type": "고난도 종합", "q": "무선통신 파트와 5G 파트를 함께 고려할 때 가장 적절한 설명은?", "opts": ["고주파 대역을 쓰면 항상 전국망 구축이 더 쉬워진다.", "더 높은 주파수 대역은 고속 전송에 유리하지만 범위와 장애물 투과 문제 때문에 더 많은 기지국과 정교한 기술이 필요하다.", "5G의 핵심은 저주파만 쓰는 것이다.", "주파수와 기지국 수는 무관하다."], "ans": 1, "exp": "고주파의 속도 장점과 커버리지 약점을 함께 기억해야 한다."}, {"type": "고난도 종합", "q": "셀룰러 개념과 주파수 재사용을 가장 잘 이해한 설명은?", "opts": ["주파수 재사용이 높아질수록 효율은 늘 수 있으나 간섭 관리도 더 중요해진다.", "재사용은 무조건 금지해야 한다.", "멀리 떨어진 셀보다 인접 셀에서 같은 주파수를 쓰는 것이 항상 더 안전하다.", "주파수 재사용은 위성통신에서만 쓰인다."], "ans": 0, "exp": "셀룰러 핵심은 효율과 간섭 사이의 균형이다."}, {"type": "고난도 종합", "q": "다음 중 '정확한 정의'보다 '관계 이해'가 특히 중요한 묶음은?", "opts": ["AI-머신러닝-딥러닝, 인증-인가, TCP-UDP, Wi‑Fi 5GHz-이동통신 5G", "CPU만 단독 정의", "패리티 비트 단독 정의", "ENIAC 연도만 암기"], "ans": 0, "exp": "이 과목은 비슷한 개념들 사이의 관계를 헷갈리게 내는 문제가 많다."}, {"type": "고난도 종합", "q": "교수 입장에서 가장 출제하기 좋은 함정 조합은 무엇인가?", "opts": ["완전히 다른 개념만 묶기", "비슷하지만 다른 개념을 의도적으로 인접 배치해 구분을 요구하기", "정답이 너무 명백한 선지만 주기", "연도 외우기만 시키기"], "ans": 1, "exp": "네가 느낀 바로 그 부분이다. 좋은 시험 문제는 유사개념 변별에 강하다."}, {"type": "고난도 종합", "q": "다음 중 시험에서 가장 위험한 오개념은?", "opts": ["Wi‑Fi 5GHz와 이동통신 5G를 같은 의미로 이해하는 것", "CPU가 연산 장치라는 것", "AI가 상위 개념이라는 것", "IP 주소가 주소라는 것"], "ans": 0, "exp": "비슷한 표기 때문에 생기는 대표적 함정이다."}, {"type": "고난도 종합", "q": "강의자료의 멀티미디어와 네트워크를 연결할 때 가장 적절한 설명은?", "opts": ["멀티미디어 데이터는 크기와 실시간성이 문제이므로 압축과 전송 방식 선택이 중요하다.", "멀티미디어는 네트워크와 전혀 무관하다.", "압축은 오직 저장용이고 전송과는 관계없다.", "동영상은 TCP/UDP 선택과 무관하다."], "ans": 0, "exp": "멀티미디어는 데이터 크기와 시간 민감성이 커서 압축과 전송 계층 특성이 중요하다."}, {"type": "고난도 종합", "q": "다음 중 강의자료 전반을 관통하는 핵심 질문으로 가장 적절한 것은?", "opts": ["이 기술의 영어 약자는 무엇인가?", "정보가 어떻게 표현되고, 처리되고, 전달되고, 지능화되는가?", "기계는 왜 금속으로 만들어지는가?", "모든 기술은 어떤 회사가 만들었는가?"], "ans": 1, "exp": "ICT와 소프트웨어 과목은 정보의 표현-처리-전달-응용을 통합적으로 본다."}, {"type": "고난도 종합", "q": "정보보안과 네트워크를 연결한 설명으로 가장 적절한 것은?", "opts": ["포트, IP, 라우팅은 보안과 무관하다.", "네트워크는 정보 전달 경로를 만들고, 보안은 그 경로 위 정보의 기밀성·무결성·가용성을 지키는 문제와 연결된다.", "보안은 오직 암호학 문제다.", "네트워크가 빠르면 보안은 자동으로 좋아진다."], "ans": 1, "exp": "보안은 전송되는 정보와 시스템 전체의 안전성 문제이므로 네트워크와 긴밀히 연결된다."}, {"type": "고난도 종합", "q": "강의자료에서 '초연결'과 가장 직접적으로 연결되는 것은?", "opts": ["주파수 하나만 독점 사용", "사람, 기기, 데이터, 서비스가 네트워크로 촘촘히 연결되는 구조", "모든 시스템을 오프라인화하는 것", "연결을 최소화해 보안만 강화하는 것"], "ans": 1, "exp": "초연결은 사람과 사물, 서비스 간 연결 밀도의 증가를 뜻한다."}, {"type": "고난도 종합", "q": "강의자료에서 '초지능'과 가장 직접적으로 연결되는 것은?", "opts": ["데이터 기반 분석과 AI를 통한 판단·자동화 고도화", "저장장치 용량만 증가하는 현상", "모든 기기를 더 무겁게 만드는 것", "오직 사람이 수동으로 판단하는 구조"], "ans": 0, "exp": "초지능은 데이터와 AI를 통한 판단·추천·자동화의 고도화를 뜻한다."}, {"type": "고난도 종합", "q": "예상문제를 어렵게 만드는 가장 타당한 방식은?", "opts": ["연도만 더 많이 외우게 한다.", "정답 문장을 노골적으로 길고 친절하게 만든다.", "비슷한 개념의 미세한 차이를 선지에서 교차시키고, 부분적으로 맞는 선지를 섞어 변별력을 높인다.", "모든 문제를 OX로만 만든다."], "ans": 2, "exp": "고난도 문제는 '완전히 틀린 선지'보다 '거의 맞지만 핵심이 어긋난 선지'를 섞는다."}, {"type": "고난도 종합", "q": "ICT 과목 시험에서 고득점을 위한 공부법으로 가장 적절한 것은?", "opts": ["정의만 암기하고 관계는 무시한다.", "단원별로 쪼개 외운 뒤 끝낸다.", "유사개념 비교표를 만들고, 장단점·포함관계·흐름을 반복해 연결한다.", "한글 약자와 영어 약자만 외운다."], "ans": 2, "exp": "이 과목은 포함관계, 비교, 장단점, 흐름 연결이 특히 중요하다."}, {"type": "고난도 종합", "q": "다음 중 이번 고난도 예상문제 세트의 취지와 가장 맞는 것은?", "opts": ["교수 입장에서 헷갈리게 낼 만한 포인트를 훈련해 실제 시험에서 변별형 문제 대응력을 높이려는 것", "정답이 너무 쉬워 고민 없이 찍게 하려는 것", "범위 밖 내용을 섞어 혼란만 주려는 것", "암기를 포기하게 만들려는 것"], "ans": 0, "exp": "이번 버전의 목적은 정답이 뻔한 문제를 버리고, 실제 시험에서 나올 법한 구분형·비교형 함정을 훈련하는 데 있다."}]];
+var NAMES = ["세트 1 — 디지털·산업혁명·AI 심화", "세트 2 — 컴퓨터 구조·소프트웨어 심화", "세트 3 — 데이터표현·보안·네트워크 심화", "세트 4 — 무선통신·이동통신 심화", "세트 5 — 전범위 종합 킬러"];
+
+var mode = 'normal';
+var currentSet = 0;
+var currentIndex = 0;
+var score = 0;
+var answered = false;
+var wrongNotes = [];
+var retryPool = [];
+
+function el(id){ return document.getElementById(id); }
+
+function esc(str){
+  if(str === null || typeof str === 'undefined') return '';
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#39;');
+}
+
+function currentData(){
+  return mode === 'retry' ? retryPool : DATA[currentSet];
+}
+
+function dedupe(list){
+  var seen = {};
+  var out = [];
+  for(var i=0;i<list.length;i++){
+    var item = list[i];
+    var key = (item.q || '') + '||' + (item.code || '');
+    if(!seen[key]){ seen[key] = true; out.push(item); }
+  }
+  return out;
+}
+
+function classify(q){
+  var text = ((q.type||'') + ' ' + (q.q||'') + ' ' + (q.exp||''));
+  if(/산업혁명|아날로그|디지털|AI|딥러닝|생성형|로봇|튜링/.test(text)) return '디지털·AI·로봇';
+  if(/컴퓨터|CPU|GPU|운영체제|임베디드|펌웨어|GUI|UX|언어/.test(text)) return '컴퓨터 구조·소프트웨어';
+  if(/비트|바이트|보수|ASCII|Unicode|샘플링|압축|보안|TCP|UDP|IP|라우터/.test(text)) return '데이터·보안·네트워크';
+  if(/주파수|Wi|Bluetooth|ZigBee|GPS|이동통신|셀룰러|CDMA|5G|6G/.test(text)) return '무선·이동통신';
+  return '종합';
+}
+
+function renderSetBar(){
+  var bar = el('setBar');
+  bar.innerHTML = '';
+  for(var i=0;i<NAMES.length;i++){
+    var btn = document.createElement('button');
+    btn.className = 'set-btn' + ((mode === 'normal' && i === currentSet) ? ' active' : '');
+    btn.innerHTML = esc(NAMES[i]);
+    btn.setAttribute('data-idx', String(i));
+    btn.onclick = function(){ switchSet(parseInt(this.getAttribute('data-idx'), 10)); };
+    bar.appendChild(btn);
+  }
+}
+
+function switchSet(idx){
+  mode = 'normal';
+  currentSet = idx;
+  currentIndex = 0;
+  score = 0;
+  answered = false;
+  render();
+}
+
+function render(){
+  renderSetBar();
+  var area = el('quizArea');
+  var list = currentData();
+  if(!list || !list.length){
+    area.innerHTML = '<div class="result"><div class="res-grade">문제가 없습니다</div><div class="res-desc">표시할 문제가 없다.</div></div>';
+    return;
+  }
+  if(currentIndex >= list.length){ showResult(); return; }
+
+  var q = list[currentIndex];
+  var pct = Math.round((currentIndex / list.length) * 100);
+  var html = '';
+  html += '<div class="progress-wrap"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
+  html += '<div class="q-meta">';
+  html += '<span class="q-num">' + (mode === 'retry' ? '오답 다시풀기' : '문제') + ' ' + (currentIndex + 1) + ' / ' + list.length + '</span>';
+  html += '<span class="q-score">' + (mode === 'retry' ? '복습 모드' : ('점수: ' + score + '점')) + '</span>';
+  html += '</div>';
+  html += '<div class="q-type">' + esc(q.type) + '</div>';
+  html += '<div class="q-text">' + esc(q.q) + '</div>';
+  if(q.code) html += '<div class="code-box">' + esc(q.code) + '</div>';
+  html += '<div class="opts">';
+  for(var i=0;i<q.opts.length;i++) html += '<button class="opt" data-choice="' + i + '">' + ['A','B','C','D'][i] + '. ' + esc(q.opts[i]) + '</button>';
+  html += '</div>';
+  html += '<div id="expBox"></div>';
+  html += '<div class="nav-row"><button class="next-btn" id="nextBtn" style="display:none">' + ((currentIndex + 1 < list.length) ? '다음 문제 →' : '결과 보기 →') + '</button></div>';
+  area.innerHTML = html;
+
+  var btns = area.getElementsByClassName('opt');
+  for(var j=0;j<btns.length;j++) btns[j].onclick = function(){ choose(parseInt(this.getAttribute('data-choice'),10)); };
+  el('nextBtn').onclick = nextQuestion;
+}
+
+function choose(idx){
+  if(answered) return;
+  answered = true;
+  var list = currentData();
+  var q = list[currentIndex];
+  var opts = el('quizArea').getElementsByClassName('opt');
+  var ok = (idx === q.ans);
+
+  if(mode === 'normal' && ok) score++;
+  if(!ok){
+    var copy = JSON.parse(JSON.stringify(q));
+    copy.chosen = idx;
+    copy.setName = NAMES[currentSet] || '오답 다시풀기';
+    copy.category = classify(q);
+    wrongNotes.push(copy);
+  }
+
+  for(var i=0;i<opts.length;i++) opts[i].disabled = true;
+  opts[idx].className += ok ? ' correct' : ' wrong';
+  if(!ok) opts[q.ans].className += ' reveal';
+
+  var expHtml = '<div class="explain ' + (ok ? 'ok' : 'ng') + '">';
+  expHtml += ok ? '✓ 정답! ' : ('✗ 오답 — 정답: ' + ['A','B','C','D'][q.ans] + '번. ');
+  expHtml += esc(q.exp) + '</div>';
+  el('expBox').innerHTML = expHtml;
+  el('nextBtn').style.display = 'inline-block';
+}
+
+function nextQuestion(){
+  currentIndex++;
+  answered = false;
+  render();
+}
+
+function showResult(){
+  var area = el('quizArea');
+  var list = currentData();
+  if(mode === 'retry'){
+    area.innerHTML = '<div class="result"><div class="res-score">' + list.length + '</div><div class="res-label">오답 복습 완료</div><div class="res-grade">🔁 다시 풀기 끝</div><div class="res-desc">이 정도면 그냥 틀린 문제만 모아놓은 개인 과외판이다. 또 틀린 유형을 확인해라.</div><button class="retry-btn" id="resultWrongBtn">오답노트 보기</button><button class="retry-btn" id="resultStatsBtn">유형 통계 보기</button></div>';
+    el('resultWrongBtn').onclick = showWrongNotes;
+    el('resultStatsBtn').onclick = showStats;
+    return;
+  }
+  var pct = Math.round((score / list.length) * 100);
+  var grade = '🫠 개념 구분 다시 필요';
+  if(pct >= 90) grade = '🏆 교수 함정 대응 가능';
+  else if(pct >= 80) grade = '🔥 상위권 실전권';
+  else if(pct >= 70) grade = '🙂 기본은 탄탄, 변별 선지 훈련 더 필요';
+  else if(pct >= 60) grade = '📚 아는 듯하지만 선지에 잘 낚임';
+  area.innerHTML = '<div class="result"><div class="res-score">' + score + ' / ' + list.length + '</div><div class="res-label">정답률 ' + pct + '%</div><div class="res-grade">' + grade + '</div><div class="res-desc">이번 세트는 일부 선지가 ' +
+  '부분적으로 맞는 표현을 섞어 두었다. 즉, 키워드 하나 보고 찍는 습관을 버리는 훈련용이다.</div><button class="retry-btn" id="retrySetBtn">↺ 이 세트 다시 풀기</button></div>';
+  el('retrySetBtn').onclick = function(){ switchSet(currentSet); };
+}
+
+function showWrongNotes(){
+  var area = el('quizArea');
+  var notes = dedupe(wrongNotes);
+  if(!notes.length){
+    area.innerHTML = '<div class="card"><h3>❌ 오답노트</h3><p>오답이 아직 없다. 이번엔 덜 짜쳤다는 뜻일 수도 있고, 아직 안 풀었다는 뜻일 수도 있다.</p></div>';
+    return;
+  }
+  var html = '<div class="card"><h3>❌ 오답노트</h3><p class="small-muted">같은 문제를 여러 번 틀려도 한 번만 정리했다. 중요한 건 반복된 약점 패턴이다.</p>';
+  for(var i=0;i<notes.length;i++){
+    var q = notes[i];
+    html += '<div class="note-item"><b>' + (i+1) + '. ' + esc(q.q) + '</b><br><span class="small-muted">세트: ' + esc(q.setName || '-') + ' / 유형: ' + esc(q.category || classify(q)) + '</span><br>정답: ' + ['A','B','C','D'][q.ans];
+    if(typeof q.chosen === 'number') html += ' / 네 답: ' + ['A','B','C','D'][q.chosen];
+    html += '<br>해설: ' + esc(q.exp) + '</div>';
+  }
+  html += '<div style="margin-top:14px"><button class="retry-btn" id="wrongRetryBtn">오답만 다시 풀기</button><button class="retry-btn" id="wrongStatsBtn">틀린유형 통계</button></div></div>';
+  area.innerHTML = html;
+  el('wrongRetryBtn').onclick = startRetryWrong;
+  el('wrongStatsBtn').onclick = showStats;
+}
+
+function startRetryWrong(){
+  var notes = dedupe(wrongNotes);
+  if(!notes.length){
+    el('quizArea').innerHTML = '<div class="card"><h3>🔁 오답 다시풀기</h3><p>오답이 아직 없다. 아직은 너한테 굴복한 문제집이다.</p></div>';
+    return;
+  }
+  retryPool = [];
+  for(var i=0;i<notes.length;i++) retryPool.push(JSON.parse(JSON.stringify(notes[i])));
+  mode = 'retry';
+  currentIndex = 0;
+  answered = false;
+  render();
+}
+
+function showStats(){
+  var area = el('quizArea');
+  var notes = dedupe(wrongNotes);
+  if(!notes.length){
+    area.innerHTML = '<div class="card"><h3>📊 틀린유형 통계</h3><p>오답이 아직 없다. 이 정도면 파일이 삐졌거나 네가 아직 안 푼 거다.</p></div>';
+    return;
+  }
+  var map = {};
+  for(var i=0;i<notes.length;i++) {
+    var cat = notes[i].category || classify(notes[i]);
+    map[cat] = (map[cat] || 0) + 1;
+  }
+  var items = [];
+  for(var k in map) items.push([k, map[k]]);
+  items.sort(function(a,b){ return b[1]-a[1]; });
+  var html = '<div class="card"><h3>📊 틀린유형 통계</h3><p class="small-muted">어느 파트에서 자꾸 선지 분간을 못 하는지 보여주는 표다.</p><div class="stats-grid">';
+  for(var j=0;j<items.length;j++) html += '<div class="stat-card"><div class="stat-label">' + esc(items[j][0]) + '</div><div class="stat-value">' + items[j][1] + '</div></div>';
+  html += '</div><div style="margin-top:14px"><button class="retry-btn" id="statsRetryBtn">오답만 다시 풀기</button><button class="retry-btn" id="statsBackBtn">원래 문제로</button></div></div>';
+  area.innerHTML = html;
+  el('statsRetryBtn').onclick = startRetryWrong;
+  el('statsBackBtn').onclick = returnToNormal;
+}
+
+function returnToNormal(){
+  mode = 'normal';
+  currentIndex = 0;
+  score = 0;
+  answered = false;
+  render();
+}
+
+el('btnWrong').onclick = showWrongNotes;
+el('btnRetry').onclick = startRetryWrong;
+el('btnStats').onclick = showStats;
+el('btnNormal').onclick = returnToNormal;
+
+render();
+</script>
+</body>
+</html>
